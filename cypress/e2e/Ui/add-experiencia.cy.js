@@ -26,7 +26,7 @@ describe('Funcionalidade: Adicionar experiência', () => {
         cy.contains('Experiência Removida').should('be.visible')
     });
 
-    it.only('Validar mensagem de campos obrigatórios quando não preenchidos', () => {
+    it('Validar mensagem de campos obrigatórios quando não preenchidos', () => {
         cy.get('[data-test="experience-submit"]').click()
         cy.get('.MuiFormHelperText-root').should('contain', 'Posição é obrigatória')
         cy.get('.MuiFormHelperText-root').should('contain', 'Empresa é obrigatória')
