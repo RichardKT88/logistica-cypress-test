@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import auth from '../fixtures/auth.json'
+
 Cypress.Commands.add('navigate', (route) => {
     cy.intercept(route).as('loadpage')
     cy.visit(route, { timeout: 30000 })
@@ -73,4 +75,37 @@ Cypress.Commands.add("profileClear", () => {
     cy.get('[data-test="profile-instagram"]').clear()
     cy.get('[data-test="profile-medium"]').clear()
     cy.get('[data-test="profile-socials"]').click()
+})
+
+Cypress.Commands.add("tokenJwt", () => {
+    cy.request({
+        method: 'POST',
+        url: '/api/auth',
+        body: auth
+    }).then((response) => {
+        return response.body.jwt
+    })
+})
+
+Cypress.Commands.add("criarPostagem", (token, texto) => {
+    cy.request({
+        method: 'POST',
+        url: '/api/posts',
+        headers: {
+            Cookie: token
+        },
+        body: {
+            text: texto
+        }
+    })
+})
+
+Cypress.Commands.add("usuarioLogado", (token) => {
+    cy.request({
+        method: 'GET',
+        url: '/api/profile/me',
+        headers: {
+            Cookie: token
+        }    
+    })
 })
