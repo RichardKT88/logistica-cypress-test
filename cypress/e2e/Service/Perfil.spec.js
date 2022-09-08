@@ -42,7 +42,7 @@ describe('Teste de Consulta de Perfil', () => {
         })
 
     });
-    it.only('[GET] - Seleciona os repositórios do GitHub pelo nome do usuário', () => {
+    it('[GET] - Seleciona os repositórios do GitHub pelo nome do usuário', () => {
         cy.usuarioLogado(token).then((response) => {
             let gitHubUsername = response.body.githubusername;
             cy.request({
@@ -96,6 +96,112 @@ describe('Teste de criação/atualização de perfil', () => {
 
 });
 
-describe('Teste', () => {
-    
+describe('Testes de exclusão', () => {
+    let token;
+
+    beforeEach(() => {
+        cy.criarUsuario('Teste', 'email@email.com', 'pass123').then(() => {
+            cy.tokenJwt().then((auth) => {
+                token = auth
+            })
+        })
+    });
+
+    it('[DELETE] - Deleta a conta do usuário', () => {
+        cy.request({
+            method: 'DELETE',
+            url: '/api/profile',
+            headers: {
+                Cookie: token
+            },
+        }).then((response) => {
+            expect(response.status).to.eq(200)
+            expect(response.body.msg).to.eq("Usuário removido")
+
+        })
+    });
+
+    it('[DELETE] - Deleta experiência profissional', () => {
+        cy.usuarioLogado(token).then((response) => {
+            let experienceId = response.body.experience._id;
+            cy.request({
+                method: 'DELETE',
+                url: `/api/profile/experience/${experienceId}`,
+                headers: {
+                    Cookie: token
+                },
+            }).then((response) => {
+                expect(response.status).to.eq(200)    
+            })
+        
+        })
+       
+    });
+
+    it('[DELETE] - Deleta formação acadêmica', () => {
+        cy.usuarioLogado(token).then((response) => {
+            let educationId = response.body.education._id;
+            cy.request({
+                method: 'DELETE',
+                url: `/api/profile/education/${educationId}`,
+                headers: {
+                    Cookie: token
+                },
+            }).then((response) => {
+                expect(response.status).to.eq(200)    
+            })        
+        })
+    });
+});
+
+describe('Testes de Atualizacão', () => {
+    let token;
+
+    beforeEach(() => {
+        cy.tokenJwt().then((auth) => {
+            token = auth
+        })
+    });
+
+    it('[PUT] - Adiciona experiência profissional', () => {
+        cy.request({
+            method: 'PUT',
+            url: '/api/profile/experience',
+            headers: {
+                Cookie: token
+            },
+            body: {
+                "title": "string",
+                "company": "string",
+                "location": "string",
+                "from": "2022-09-08",
+                //"to": "2022-09-08",
+                "current": true,
+                "description": "string"
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200)
+        })
+    });
+
+    it.only('[PUT] - Adiciona formação acadêmica', () => {
+        cy.request({
+            method: 'PUT',
+            url: '/api/profile/education',
+            headers: {
+                Cookie: token
+            },
+            body: {
+                "school": "string",
+                "degree": "string",
+                "fieldofstudy": "string",
+                "from": "2022-09-08",
+                //"to": "2022-09-08",
+                "current": true,
+                "description": "string"
+              }
+        }).then((response) => {
+            expect(response.status).to.eq(200)
+        })
+    });
 });

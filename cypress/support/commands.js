@@ -109,3 +109,15 @@ Cypress.Commands.add("usuarioLogado", (token) => {
         }    
     })
 })
+
+Cypress.Commands.add("criarUsuario", (name, email, password) => {
+    cy.request({
+        method: 'POST',
+        url: '/api/users',
+        body: {
+            name: name,
+            email: email,
+            password: password  
+        }
+    })
+})
