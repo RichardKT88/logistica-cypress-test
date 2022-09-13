@@ -6,7 +6,7 @@ module.exports = defineConfig({
   viewportWidth: 1140,
   viewportHeight: 768,
   defaultCommandTimeout: 10000,
-  projectId: 'idProject',
+  projectId: 'cijf1i',
   e2e: {
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     
@@ -15,7 +15,7 @@ module.exports = defineConfig({
       grepTags(config)
 
       // if version not defined, use local
-      const version = config.env.version || 'prd'
+      const version = config.env.version || 'qa'
 
       // load env from json
       config.env = require(`./cypress/config/${version}.json`);

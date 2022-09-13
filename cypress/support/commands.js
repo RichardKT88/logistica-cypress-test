@@ -15,6 +15,20 @@ Cypress.Commands.add("login", (email, password) => {
     cy.get('[data-test="login-submit"]').click()
 }
 )
+import user from "../fixtures/usuarios.json"
+Cypress.Commands.add("loginApp", () => {
+    cy.request({
+        method: 'POST',
+        url: 'api/auth',
+        body: {
+            email: user[0].email,
+            password: user[0].senha
+        }
+    }).then((response) => {
+        cy.setCookie('region', 'SP')
+        window.localStorage.setItem('token', response.body.jwt)
+    })
+})
 Cypress.Commands.add("register", (name, email, password) => {
     cy.get('[data-test="register-name"] > .MuiInputBase-root > .MuiInputBase-input').type(name)
     cy.get('[data-test="register-email"] > .MuiInputBase-root > .MuiInputBase-input').type(email)
@@ -106,7 +120,7 @@ Cypress.Commands.add("usuarioLogado", (token) => {
         url: '/api/profile/me',
         headers: {
             Cookie: token
-        }    
+        }
     })
 })
 
@@ -117,7 +131,7 @@ Cypress.Commands.add("criarUsuario", (name, email, password) => {
         body: {
             name: name,
             email: email,
-            password: password  
+            password: password
         }
     })
 })

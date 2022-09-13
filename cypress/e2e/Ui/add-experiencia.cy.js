@@ -4,10 +4,15 @@ const experienciaPage = require('../../support/Experiencia/experiencia-pages')
 
 describe('Funcionalidade: Adicionar experiência', () => {
     beforeEach(() => {
-        cy.fixture("usuarios").then((user) => {
-            cy.login(user[1].email, user[1].senha)
-        })
+        // cy.fixture("usuarios").then((user) => {
+        //     cy.login(user[1].email, user[1].senha)
+        // })
+        cy.loginApp();
         cy.visit('adicionar-experiencia')
+    });
+
+    it.only('Acessar experiência', () => {
+           cy.log(2+2) 
     });
 
     it('Deve adicionar uma experiência com sucesso', () => {
