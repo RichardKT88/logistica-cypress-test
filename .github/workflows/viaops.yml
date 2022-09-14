@@ -15,10 +15,9 @@ on:
         default: 'chrome' 
     
 env:
-  DEFAULT_KEY: "39439ec5-3ceb-4e13-8112-1b4433b4d084"
+  DEFAULT_KEY: "0d99676d-bcc9-41ae-85b1-f4975d6c39a8"
   DEFAULT_AMB: "qa"
   DEFAULT_BROWSER: "chrome"
-  DEFAULT_TAG: "@demo"
   DEFAULT_GROUP: "CI"
 
 jobs:
