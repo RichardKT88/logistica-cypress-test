@@ -8,7 +8,7 @@ on:
       amb:
         description: 'Selecionar algum destes ambientes: dev / stg / hlg / prd'
         required: false
-        default: 'qa'
+        default: 'prd'
       browser:
         description: 'Selecionar algum destes browsers: chrome / electron'
         required: true
@@ -16,7 +16,7 @@ on:
     
 env:
   DEFAULT_KEY: "0d99676d-bcc9-41ae-85b1-f4975d6c39a8"
-  DEFAULT_AMB: "qa"
+  DEFAULT_AMB: "prd"
   DEFAULT_BROWSER: "chrome"
   DEFAULT_GROUP: "CI"
 
