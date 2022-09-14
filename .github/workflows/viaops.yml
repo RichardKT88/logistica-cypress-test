@@ -16,7 +16,7 @@ on:
     
 env:
   DEFAULT_KEY: "0d99676d-bcc9-41ae-85b1-f4975d6c39a8"
-  DEFAULT_AMB: "qa"
+  DEFAULT_AMB: 'qa'
   DEFAULT_BROWSER: "chrome"
   DEFAULT_GROUP: "CI"
 
@@ -40,7 +40,7 @@ jobs:
       - name: Cypress run tests
         uses: cypress-io/github-action@v4
         with: 
-          command: npx cypress run --record --parallel --group ${{env.DEFAULT_GROUP}} --key ${{env.DEFAULT_KEY}} --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env version=${{github.event.inputs.amb || env.DEFAULT_AMB}}}
+          command: npx cypress run --record --parallel --group ${{env.DEFAULT_GROUP}} --key ${{env.DEFAULT_KEY}} --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env version=${{github.event.inputs.amb || env.DEFAULT_AMB}}
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
