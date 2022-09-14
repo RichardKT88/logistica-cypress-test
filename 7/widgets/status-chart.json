@@ -1,0 +1,1 @@
+[{"uid":"da254a655ec5e9c9","name":"Acessar experiência","time":{"start":1663190366885,"stop":1663190368631,"duration":1746},"status":"passed","severity":"normal"},{"uid":"fdeb3d021b5d7603","name":"Deve criar perfil com sucesso e SEM redes sociais","time":{"start":1663190373794,"stop":1663190385908,"duration":12114},"status":"failed","severity":"normal"}]
